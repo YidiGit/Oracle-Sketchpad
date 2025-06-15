@@ -6,6 +6,9 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from datetime import datetime
 
 # ================================
 # 环境修复：关闭文件监视，避免 torch.classes 报错
@@ -160,10 +163,10 @@ def show_home():
 
     st.title("📜 甲骨文科普")
     st.write("""
-甲骨文诞生于商代，用于占卜和记录，是研究中国早期文明的重要文字。  
-- **发现**：1899年安阳殷墟  
-- **用途**：祭祀、占卜、记录  
-- **价值**：汉字起源的重要见证
+        甲骨文诞生于商代，用于占卜和记录，是研究中国早期文明的重要文字。  
+        - **发现**：1899年安阳殷墟  
+        - **用途**：祭祀、占卜、记录  
+        - **价值**：汉字起源的重要见证
     """)  
 
     st.header("🐭🐮🐯 十二生肖详解")
@@ -174,10 +177,10 @@ def show_home():
             detail = ZODIAC_DETAILS[animal]
             uri = to_base64(f"{ASSETS_DIR}/Oracle_Bone/{code}.jpg")
             st.markdown(f"""
-**{animal}**  
-{detail}  
-<img src="{uri}" style="width:90px;height:90px;object-fit:contain;" />
-""", unsafe_allow_html=True)
+                **{animal}**  
+                {detail}  
+                <img src="{uri}" style="width:90px;height:90px;object-fit:contain;" />
+                """, unsafe_allow_html=True)
     with col_img:
         zp = os.path.join(ASSETS_DIR,"zodiac.png")
         if os.path.exists(zp):
@@ -187,9 +190,9 @@ def show_home():
 
     st.markdown("---")
     st.markdown("""
-## ✍️ 手绘识别体验  
-在“绘图体验”页面，使用画布手绘甲骨文草图，点击【🚀 开始预测】即可查看 AI 识别结果。  
-""", unsafe_allow_html=True)
+                ## ✍️ 手绘识别体验  
+                在“绘图体验”页面，使用画布手绘甲骨文草图，点击【🚀 开始预测】即可查看 AI 识别结果。  
+                """, unsafe_allow_html=True)    
     if st.button("🎨 去绘图体验"):
         st.session_state.page = "绘图体验"
         st.rerun()
@@ -215,33 +218,60 @@ def show_draw():
                 u1 = to_base64(f"{ASSETS_DIR}/Oracle_Bone/{cls}.jpg")
                 u2 = to_base64(f"{ASSETS_DIR}/Real_Animals/{cls}.png")
                 st.markdown(f"""
-<div style="display:flex;gap:8px;align-items:center;margin:8px 0;">
-  <img src="{u1}" style="width:80px;height:80px;border-radius:6px;object-fit:contain;"/>
-  <img src="{u2}" style="width:80px;height:80px;border-radius:6px;object-fit:contain;"/>
-  <span>{CODE_NAME[cls]} {sc*100:.1f}%</span>
-</div>
-""", unsafe_allow_html=True)
+                            <div style="display:flex;gap:8px;align-items:center;margin:8px 0;">
+                              <img src="{u1}" style="width:80px;height:80px;border-radius:6px;object-fit:contain;"/>
+                              <img src="{u2}" style="width:80px;height:80px;border-radius:6px;object-fit:contain;"/>
+                              <span>{CODE_NAME[cls]} {sc*100:.1f}%</span>
+                            </div>
+                            """, unsafe_allow_html=True)
                 st.progress(sc)
         else:
             st.info("请先在左侧画布绘制，然后点击“开始预测”")
 
     st.markdown("---")
     st.markdown("""
-## 💬 留言 & 建议  
-完成绘图识别后，欢迎您前往“反馈建议”页面，告诉我们您的体验和改进建议！
-""", unsafe_allow_html=True)
+                ## 💬 留言 & 建议  
+                完成绘图识别后，欢迎您前往“反馈建议”页面，告诉我们您的体验和改进建议！
+                """, unsafe_allow_html=True)
     if st.button("💬 去反馈建议"):
         st.session_state.page = "反馈建议"
         st.rerun()
 
+# def show_feedback():
+#     st.title("💬 反馈建议")
+#     with st.form("fb"):
+#         st.text_input("您的称呼（选填）")
+#         st.slider("满意度评分",1,5,5)
+#         st.text_area("请留下您的建议")
+#         if st.form_submit_button("提交"):
+#             st.success("🙏 感谢您的反馈！")
+
+
+
+# 初始化连接 Google Sheets（只运行一次）
+@st.cache_resource
+def init_gsheet():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+        st.secrets["gcp_service_account"], scope
+    )
+    gc = gspread.authorize(credentials)
+    sheet = gc.open("Oracle_Streamlit_Feedback").sheet1  # 你的 Sheet 名
+    return sheet
+
 def show_feedback():
     st.title("💬 反馈建议")
+
     with st.form("fb"):
-        st.text_input("您的称呼（选填）")
-        st.slider("满意度评分",1,5,5)
-        st.text_area("请留下您的建议")
+        name = st.text_input("您的称呼（选填）")
+        score = st.slider("满意度评分", 1, 5, 5)
+        comment = st.text_area("请留下您的建议")
+
         if st.form_submit_button("提交"):
-            st.success("🙏 感谢您的反馈！")
+            sheet = init_gsheet()
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            sheet.append_row([timestamp, name, score, comment])
+            st.success("🙏 感谢您的反馈，已成功提交！")
 
 # 根据页签渲染
 if st.session_state.page == "首页科普":
