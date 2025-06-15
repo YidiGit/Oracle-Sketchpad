@@ -21,3 +21,4 @@ acids-rave
 open_clip_torch
 streamlit-drawable-canvas
 gspread
+oauth2client
