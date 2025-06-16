@@ -5,7 +5,7 @@ html, body, .stApp, .main, .block-container, section.main > div {
   color: #000 !important;
 }
 
-.block-container, .main {
+.block-container, .main, section.main > div {
     background-color: transparent !important;
 }
 
