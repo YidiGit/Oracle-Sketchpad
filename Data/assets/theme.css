@@ -1,5 +1,5 @@
 /* ===== Global background & text color ===== */
-.stApp {
+html,body,.stApp {
   background: #c7c997 !important;
   color: #000 !important;
 }
