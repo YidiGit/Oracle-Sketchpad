@@ -5,13 +5,13 @@ ZODIAC_DETAILS = {
     "Tiger":   "In oracle bone script, the character for 'tiger' depicts its head facing upward and tail downward, with a wide-open mouth, sharp teeth and claws, stripes on its body, and a strong, curved tail, vividly illustrating the majestic and fierce image of a tiger.",
     "Rabbit":  "In oracle bone script, the character for 'rabbit' depicts a crouching rabbit with its head facing upward, short legs, a short tail, long ears, and a plump, round body.",
     "Dragon":  "n oracle bone script, the character for 'dragon' portrays a beast's head with a serpent's body, adorned with horns on its head, scales on its body, and a long, trailing tail.",
-    "Snake":   "Wise and graceful; glyph is a winding curve.",
-    "Horse":   "Energetic and swift; glyph shows mane and galloping legs.",
-    "Goat":    "Kind-hearted and artistic; glyph shows curled horns, wool lines.",
-    "Monkey":  "Clever and playful; glyph shows bent limbs and long tail.",
-    "Rooster": "Diligent herald of dawn; glyph highlights comb and feathers.",
-    "Dog":     "Loyal guardian and companion; glyph shows long body, curled tail.",
-    "Pig":     "Easy-going symbol of abundance; glyph is round with short tail.",
+    "Snake":   "In oracle bone script, the character for 'snake' features a triangular head at the top and a curved body below, resembling the form of a worm.",
+    "Horse":   "In oracle bone script, the character for 'horse' is depicted in a side view, complete with a mane on the head and neck, and a representation of the head, tail, and all four legs.",
+    "Goat":    "In oracle bone script, the character for 'sheep' illustrates a frontal view of a sheep's head, with two horns curving downward and nostrils forming a V-shape at the tip of the nose.",
+    "Monkey":  "n oracle bone script, the character for 'monkey' depicts a monkey standing sideways, with round, beady eyes, a furry tail, and a limb on each side of its body.",
+    "Rooster": "In oracle bone script, the character for 'rooster' resembles the shape of a rooster, featuring a high crest, a long beak, and an elongated tail.",
+    "Dog":     "In oracle bone script, the character for 'dog' features a slender body and a long tail, highlighting the characteristic curled tail of a dog.",
+    "Pig":     "In oracle bone script, the character for 'pig' outlines the shape of a pig, with a protruding belly, a short drooping tail, and stubby legs.",
 }
 
 # ---- Correct zodiac order (鼠→牛→虎→…→狗→猪) ----
