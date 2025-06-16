@@ -10,7 +10,7 @@
 
 /* Sidebar styling */
 [data-testid="stSidebar"] {
-  width: 150px !important;
+  width: 50px !important;
   min-width: 180px !important;
   max-width: 180px !important;
   background-color: #EAE2B7 !important;
