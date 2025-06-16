@@ -1,0 +1,67 @@
+/* ===== Global background & text color ===== */
+.stApp {
+  background: #c7c997 !important;
+  color: #000 !important;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+  background-color: #EAE2B7 !important;
+  color: #000 !important;
+}
+[data-testid="stSidebar"] * {
+  color: #000 !important;
+}
+
+/* ===== Generic buttons (.stButton) ===== */
+.stButton > button {
+  background: linear-gradient(45deg, #85FFBD, #FFFB7D) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 10px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  transition: transform .2s, box-shadow .2s !important;
+}
+.stButton > button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1) !important;
+}
+.stButton > button:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ===== Form submit buttons (.stFormSubmitButton) ===== */
+.stFormSubmitButton > button {
+  background: linear-gradient(45deg, #85FFBD, #FFFB7D) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 10px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  transition: transform .2s, box-shadow .2s !important;
+}
+.stFormSubmitButton > button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1) !important;
+}
+.stFormSubmitButton > button:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ===== Canvas toolbar (streamlit-drawable-canvas) ===== */
+.canvas-toolbar {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ===== Mobile responsiveness ===== */
+@media (max-width: 600px) {
+  .stCanvas > div {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
