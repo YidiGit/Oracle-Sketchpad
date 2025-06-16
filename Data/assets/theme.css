@@ -1,9 +1,8 @@
 /* ===== Global background & text color ===== */
- .stApp {
+.stApp {
   background: #c7c997 !important;
   color: #000 !important;
-} 
-
+}
 
 /* Sidebar styling */
 [data-testid="stSidebar"] {
