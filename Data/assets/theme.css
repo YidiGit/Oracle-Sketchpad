@@ -1,12 +1,15 @@
-_CSS_TXT = """
 /* ===== Global background & text color ===== */
-html, body, .stApp, .main, .block-container, section.main > div {
+html, body, .stApp {
   background: #c7c997 !important;
   color: #000 !important;
 }
 
 .block-container, .main, section.main > div {
     background-color: transparent !important;
+}
+
+div[data-testid="stVerticalBlock"] {
+  background-color: transparent !important;
 }
 
 /* Sidebar styling */
