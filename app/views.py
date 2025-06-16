@@ -213,7 +213,16 @@ def _open_feedback_sheet():
     sheet_name: str = getattr(settings, "feedback_sheet", "Oracle_Streamlit_Feedback")
     return client.open(sheet_name).sheet1
 
-
+@st.cache_resource
+def init_gsheet():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+        st.secrets["gcp_service_account"], scope
+    )
+    gc = gspread.authorize(credentials)
+    sheet = gc.open("Oracle_Streamlit_Feedback").sheet1  # 你的 Sheet 名
+    return sheet
+    
 def _append_row_safe(row: List[str | int],
                      retries: int = 5,
                      base_delay: float = 1.0) -> None:
@@ -225,7 +234,9 @@ def _append_row_safe(row: List[str | int],
         retries: Maximum attempts before failing.
         base_delay: Initial delay in seconds; doubles each retry.
     """
-    sheet = _open_feedback_sheet()
+    
+    # sheet = _open_feedback_sheet()
+    sheet = _init_gsheet()                     
     for attempt in range(retries):
         try:
             sheet.append_row(row)
