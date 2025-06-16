@@ -1,10 +1,10 @@
 
 ZODIAC_DETAILS = {
-    "Rat":     "Quick-witted and adaptable; glyph shows a pointed snout and long tail.",
-    "Ox":      "Diligent and reliable; glyph highlights sturdy horns.",
-    "Tiger":   "Powerful and brave; glyph shows open mouth, claws, curved tail.",
-    "Rabbit":  "Gentle and alert; glyph depicts long ears and arched back.",
-    "Dragon":  "Auspicious and mighty; glyph blends beast head and serpent body.",
+    "Rat":     "In oracle bone script, the character for 'rat' depicts a pointed mouth, sharp teeth, a hunched back, short legs, a long tail, and remnants of stolen food beside it.",
+    "Ox":      "In oracle bone script, the character for 'ox' resembles the head of an ox, highlighting its pair of curved and robust horns.",
+    "Tiger":   "In oracle bone script, the character for 'tiger' depicts its head facing upward and tail downward, with a wide-open mouth, sharp teeth and claws, stripes on its body, and a strong, curved tail, vividly illustrating the majestic and fierce image of a tiger.",
+    "Rabbit":  "In oracle bone script, the character for 'rabbit' depicts a crouching rabbit with its head facing upward, short legs, a short tail, long ears, and a plump, round body.",
+    "Dragon":  "n oracle bone script, the character for 'dragon' portrays a beast's head with a serpent's body, adorned with horns on its head, scales on its body, and a long, trailing tail.",
     "Snake":   "Wise and graceful; glyph is a winding curve.",
     "Horse":   "Energetic and swift; glyph shows mane and galloping legs.",
     "Goat":    "Kind-hearted and artistic; glyph shows curled horns, wool lines.",
