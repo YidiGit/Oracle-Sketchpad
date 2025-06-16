@@ -42,7 +42,7 @@ logging.basicConfig(
 _LOG = logging.getLogger(__name__)
 
 # ───────────────────────── Global CSS ─────────────────────────────
-ASSETS_DIR = getattr(settings, "assets_dir", Path("data/assets"))
+ASSETS_DIR = getattr(settings, "assets_dir", Path("Data/assets"))
 _CSS_FILE  = ASSETS_DIR / "theme.css"
 _CSS_TXT   = _CSS_FILE.read_text("utf-8") if _CSS_FILE.is_file() else ""
 
@@ -202,7 +202,7 @@ def init_gsheet():
         st.secrets["gcp_service_account"], scope
     )
     gc = gspread.authorize(credentials)
-    sheet = gc.open("Oracle_Streamlit_Feedback").sheet1  # 你的 Sheet 名
+    sheet = gc.open("Oracle_Streamlit_Feedback").sheet1 
     return sheet
 
 def page_feedback() -> None:
