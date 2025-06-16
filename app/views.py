@@ -196,7 +196,7 @@ def page_drawing() -> None:
 
 # ─────────────────────── Feedback page ───────────────────────────
 @st.cache_resource
-def init_gsheet():
+def init_gsheet()-> gspread.models.Worksheet:
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(
         st.secrets["gcp_service_account"], scope
@@ -207,13 +207,13 @@ def init_gsheet():
 
 def page_feedback() -> None:
     """Collect user feedback and store it in Google Sheets."""
+    inject_css()                      
     st.title("💬 Feedback & Suggestions")
 
     with st.form("feedback_form"):
         name = st.text_input("Your name (optional)")
         score = st.slider("Satisfaction", 1, 5, 5)
         comment = st.text_area("Let us know what you think")
-
         submitted = st.form_submit_button("Submit")
     
     if submitted:
