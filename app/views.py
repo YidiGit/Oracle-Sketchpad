@@ -186,7 +186,7 @@ def page_drawing() -> None:
             )
             _render_top(scores)
         else:
-            st.info("Draw a glyph on the left and press **Predict**.")
+            st.info("Draw a zodiac animal sketch above and press **Predict**.")
 
     st.markdown("---")
     st.markdown("### 💬 Want to help? Head to **Feedback**!")
