@@ -42,8 +42,9 @@ logging.basicConfig(
 _LOG = logging.getLogger(__name__)
 
 # ───────────────────────── Global CSS ─────────────────────────────
-_CSS_FILE = Path("Data/assets/theme.css")
-_CSS_TXT: str = _CSS_FILE.read_text("utf-8") if _CSS_FILE.exists() else ""
+ASSETS_DIR = getattr(settings, "assets_dir", Path("Data/assets"))
+_CSS_FILE  = ASSETS_DIR / "theme.css"
+_CSS_TXT   = _CSS_FILE.read_text("utf-8") if _CSS_FILE.is_file() else ""
 
 
 def inject_css() -> None:
@@ -194,25 +195,6 @@ def page_drawing() -> None:
 
 
 # ─────────────────────── Feedback page ───────────────────────────
-@st.cache_resource(show_spinner="🔑 Connecting to Google Sheets…")
-def _open_feedback_sheet():
-    """
-    Create (once per session) an authenticated gspread Worksheet handle.
-
-    Returns:
-        gspread.models.Worksheet
-    """
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-    ]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(
-        st.secrets["gcp_service_account"], scope
-    )
-    client = gspread.authorize(creds)
-    sheet_name: str = getattr(settings, "feedback_sheet", "Oracle_Streamlit_Feedback")
-    return client.open(sheet_name).sheet1
-
 @st.cache_resource
 def init_gsheet():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -222,54 +204,20 @@ def init_gsheet():
     gc = gspread.authorize(credentials)
     sheet = gc.open("Oracle_Streamlit_Feedback").sheet1  # 你的 Sheet 名
     return sheet
-    
-def _append_row_safe(row: List[str | int],
-                     retries: int = 5,
-                     base_delay: float = 1.0) -> None:
-    """
-    Append *row* to Google Sheets with exponential back-off.
-
-    Args:
-        row: List representing a spreadsheet row.
-        retries: Maximum attempts before failing.
-        base_delay: Initial delay in seconds; doubles each retry.
-    """
-    
-    # sheet = _open_feedback_sheet()
-    sheet = init_gsheet()                     
-    for attempt in range(retries):
-        try:
-            sheet.append_row(row)
-            _LOG.info("Feedback row written to Google Sheets")
-            return
-        except Exception as exc:
-            _LOG.warning(
-                "Sheets append failed (%s) – retry %d/%d",
-                exc,
-                attempt + 1,
-                retries,
-            )
-            time.sleep(base_delay * 2 ** attempt)
-    st.error(
-        "⚠️ Could not send feedback (API quota exceeded). "
-        "Please try again later."
-    )
-
 
 def page_feedback() -> None:
     """Collect user feedback and store it in Google Sheets."""
-    inject_css()
     st.title("💬 Feedback & Suggestions")
 
     with st.form("feedback_form"):
         name = st.text_input("Your name (optional)")
         score = st.slider("Satisfaction", 1, 5, 5)
         comment = st.text_area("Let us know what you think")
-        submitted = st.form_submit_button("Submit")
 
-    if submitted:
+    if st.form_submit_button("Submit"):
+        sheet = init_gsheet()
         timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-        _append_row_safe([timestamp, name, score, comment])
+        sheet.append_row([timestamp, name, score, comment])
         st.success("🙏 Thank you — your feedback has been recorded!")
 
 
