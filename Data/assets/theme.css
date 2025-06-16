@@ -1,7 +1,12 @@
+_CSS_TXT = """
 /* ===== Global background & text color ===== */
-.stApp {
+html, body, .stApp, .main, .block-container, section.main > div {
   background: #c7c997 !important;
   color: #000 !important;
+}
+
+.block-container, .main {
+    background-color: transparent !important;
 }
 
 /* Sidebar styling */
