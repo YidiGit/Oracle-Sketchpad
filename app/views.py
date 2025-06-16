@@ -214,7 +214,9 @@ def page_feedback() -> None:
         score = st.slider("Satisfaction", 1, 5, 5)
         comment = st.text_area("Let us know what you think")
 
-    if st.form_submit_button("Submit"):
+        submitted = st.form_submit_button("Submit")
+    
+    if Submitted:
         sheet = init_gsheet()
         timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         sheet.append_row([timestamp, name, score, comment])
