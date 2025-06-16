@@ -1,25 +1,33 @@
-torch
-torchvision
-torchaudio
-torchtext
-streamlit
-ollama
-opencv-python
-transformers
-dorothy-cci
-datasets 
-tiktoken 
-onnxruntime
-Pillow
-imageio
-sounddevice
-librosa
-ultralytics
-scikit-learn
-scikit-image
-acids-rave
-open_clip_torch
-streamlit-drawable-canvas
-gspread
-oauth2client
-pydantic_settings
+# ───────────── core framework ─────────────
+streamlit>=1.35            # UI engine
+streamlit-drawable-canvas>=0.9
+
+# ───────────── ML stack ─────────────
+torch>=2.2
+open-clip-torch>=2.24      # ViT-B-32 weights
+numpy>=1.26
+Pillow>=10.3
+
+# ───────────── G-Sheets I/O ─────────────
+gspread>=6.0
+oauth2client>=4.1.3        # service-account credentials
+
+# ───────────── settings / validation ─────────────
+pydantic>=2.7
+pydantic-settings>=2.2
+
+# ───────────── CLI / helpers ─────────────
+requests>=2.31
+tqdm>=4.66                 # progress bars for embed & download scripts
+python-dotenv>=1.0         # optional .env override for settings
+
+# ───────────── quality / typing ─────────────
+mypy>=1.10
+types-requests>=2.31.0.20240602
+
+# ───────────── testing ─────────────
+pytest
+pytest-cov>=5.0            # coverage report (optional)
+
+# ───────────── misc utilities (safe) ─────────────
+typing-extensions>=4.12
