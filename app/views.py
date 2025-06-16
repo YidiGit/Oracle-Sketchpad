@@ -42,7 +42,7 @@ logging.basicConfig(
 _LOG = logging.getLogger(__name__)
 
 # ───────────────────────── Global CSS ─────────────────────────────
-ASSETS_DIR = getattr(settings, "assets_dir", Path("Data/assets"))
+ASSETS_DIR = getattr(settings, "assets_dir", Path("data/assets"))
 _CSS_FILE  = ASSETS_DIR / "theme.css"
 _CSS_TXT   = _CSS_FILE.read_text("utf-8") if _CSS_FILE.is_file() else ""
 
