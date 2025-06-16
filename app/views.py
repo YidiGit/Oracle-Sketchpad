@@ -236,7 +236,7 @@ def _append_row_safe(row: List[str | int],
     """
     
     # sheet = _open_feedback_sheet()
-    sheet = _init_gsheet()                     
+    sheet = init_gsheet()                     
     for attempt in range(retries):
         try:
             sheet.append_row(row)
