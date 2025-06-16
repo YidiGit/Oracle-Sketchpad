@@ -216,7 +216,7 @@ def page_feedback() -> None:
 
         submitted = st.form_submit_button("Submit")
     
-    if Submitted:
+    if submitted:
         sheet = init_gsheet()
         timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         sheet.append_row([timestamp, name, score, comment])
