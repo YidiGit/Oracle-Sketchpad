@@ -1,18 +1,9 @@
 /* ===== Global background & text color ===== */
-/* .stApp {
+ .stApp {
   background: #c7c997 !important;
   color: #000 !important;
-} */
+} 
 
-html, body, .stApp {
-  background-color: #c7c997 !important;
-  color: #000 !important;
-}
-
-/* 透明化主要容器，确保背景色显示 */
-.css-1outpf7, .block-container, .main, section.main > div {
-  background-color: transparent !important;
-}
 
 /* Sidebar styling */
 [data-testid="stSidebar"] {
