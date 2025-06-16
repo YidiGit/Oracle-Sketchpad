@@ -1,4 +1,12 @@
 import streamlit as st
+
+st.set_page_config(
+    page_title="oracle-bone & zodiac",
+    page_icon="🐉",
+    layout="wide",
+    initial_sidebar_state="auto",
+)
+
 from app.views import router, NAV_KEY, DEFAULT_PAGE
 
 selected = st.sidebar.radio(
